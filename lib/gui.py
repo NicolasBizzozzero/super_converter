@@ -1,7 +1,7 @@
 from tkinter import Tk, Frame, LabelFrame, Entry, Radiobutton, TOP, LEFT, \
-    RIGHT, CENTER, StringVar, IntVar, W, Button, Label
-from path import Path
+    RIGHT, CENTER, StringVar, IntVar, W, Button, Label, Menu, messagebox
 from lib.convertion_functions import convert
+from sys import argv
 
 
 def callback_convert() -> None:
@@ -20,6 +20,47 @@ def callback_bind_enter(event) -> None:
     callback_convert()
 
 
+def callback_about():
+    messagebox.showinfo("About", "Super Converter Version 0.1")
+
+
+def donothing():
+    pass
+
+
+def initialisation_of_the_menu(root: Tk) -> None:
+    menubar = Menu(root)
+    # File menu
+    filemenu = Menu(menubar, tearoff=0)
+    filemenu.add_command(label="Close", command=donothing)
+    filemenu.add_separator()
+    filemenu.add_command(label="Exit", command=root.quit)
+    menubar.add_cascade(label="File", menu=filemenu)
+
+    # Edit menu
+    editmenu = Menu(menubar, tearoff=0)
+    editmenu.add_command(label="Undo", command=donothing)
+    editmenu.add_command(label="Cut", command=donothing)
+    editmenu.add_command(label="Copy", command=donothing)
+    editmenu.add_command(label="Paste", command=donothing)
+    editmenu.add_command(label="Delete", command=donothing)
+    editmenu.add_command(label="Select All", command=donothing)
+    menubar.add_cascade(label="Edit", menu=editmenu)
+
+    # Language Menu
+    language_menu = Menu(menubar, tearoff=0)
+    language_menu.add_radiobutton()
+    menubar.add_cascade(label="Language", menu=language_menu)
+
+    # About menu
+    about_menu = Menu(menubar, tearoff=0)
+    about_menu.add_command(label="Help Index", command=donothing)
+    about_menu.add_command(label="About", command=callback_about)
+    menubar.add_cascade(label="Help", menu=about_menu)
+
+    root.config(menu=menubar)
+
+
 def initialisation_of_the_window() -> Tk:
     """ Return the properly initialized root of the windows. """
     global string_to_convert
@@ -29,10 +70,12 @@ def initialisation_of_the_window() -> Tk:
 
     # Creation of the root
     root = Tk()
-    working_directory = Path().getcwd()
-    working_directory /= "res/icon.ico"
-    root.iconbitmap(str(working_directory))
+    path = argv[0][:-18] + r"res/icon.ico"
+    root.iconbitmap(path)
     root.bind('<Return>', callback_bind_enter)
+
+    # Initialisation of the menu
+    initialisation_of_the_menu(root)
 
     # Creation of the main frame
     f_main = Frame(root)
