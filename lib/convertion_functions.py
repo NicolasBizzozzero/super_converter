@@ -10,7 +10,7 @@ def convert(number: str, src_base: int, dest_base: int) -> str:
         return "Invalid base"
 
     if not is_a_number(number, src_base):
-        return "Not a number\nor\nwrong base"
+        return "{}\n{}\n{}".format(_("Not a number"), _("or"), _("wrong base"))
 
     if src_base == 2 and dest_base == 2:
         return str(number)[2:]
