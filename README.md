@@ -9,8 +9,20 @@ Super-Converter is written in <b>Python 3</b> and uses <b>Tkinter</b> for his GU
   <img src="https://github.com/NicolasBi/Super-Converter/blob/master/res/screenshot_example.png?raw=true" alt="Example screenshot"/>
 </p>
 
+# Installation
+
+<p>
+Super-Converter is available in PyPI, just type :
+</p>
+```shell
+    pip install super_converter
+```
+<p>
+It needs no other librairy to work.
+</p>
+
 # Multi-language support
 Super-Converter currently support the following languages :
-* 🇺🇸 English
-* 🇫🇷 French
-* 🇪🇸 Spanish
+* :us: - :uk: English
+* :fr: French
+* :es: Spanish
