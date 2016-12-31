@@ -1,0 +1,81 @@
+URL list from Saturday, Dec. 31 2016 19:16 PM
+
+To copy this list, type [Ctrl] A, then type [Ctrl] C. 
+
+NicolasBi/Super-Converter: Convert your binary/decimal/hexadecimal number into binary/decimal/hexadecimal with a cool GUI !
+https://github.com/NicolasBi/Super-Converter
+
+pypa/sampleproject: A sample project that exists for PyPUG's "Tutorial on Packaging and Distributing Projects"
+https://github.com/pypa/sampleproject
+
+setup.py keywords - Recherche Google
+https://www.google.fr/search?q=setp.py+Intended+Audience&oq=setp.py+Intended+Audience&aqs=chrome..69i57.9880j0j4&sourceid=chrome&ie=UTF-8#safe=off&q=setup.py+keywords
+
+Getting Started With setuptools and setup.py — an_example_pypi_project v0.0.5 documentation
+https://pythonhosted.org/an_example_pypi_project/setuptools.html
+
+Building and Distributing Packages with Setuptools — Setuptools documentation
+http://setuptools.readthedocs.io/en/latest/setuptools.html#new-and-changed-setup-keywords
+
+Easy Install — Setuptools documentation
+http://setuptools.readthedocs.io/en/latest/easy_install.html#installation-instructions
+
+setuptools - python setup.py sdist and custom setup keywords don't play together - Stack Overflow
+http://stackoverflow.com/questions/35059585/python-setup-py-sdist-and-custom-setup-keywords-dont-play-together
+
+setup.py find_packages - Recherche Google
+https://www.google.fr/search?q=setup.py+find_packages&oq=setup.py+find_packages&aqs=chrome..69i57.5494j0j4&sourceid=chrome&ie=UTF-8
+
+find_packages — setuptools documentation
+http://code.nabla.net/doc/setuptools/api/setuptools/setuptools.find_packages.html
+
+Submitting package information : Python Package Index
+https://pypi.python.org/pypi?%3Aaction=submit_form
+
+Packaging and Distributing Projects — Python Packaging User Guide documentation
+https://packaging.python.org/distributing/#uploading-your-project-to-pypi
+
+hodge 0.1 : Python Package Index
+https://pypi.python.org/pypi/hodge/
+
+sublim text package python documentation - Recherche Google
+https://www.google.fr/search?q=sublim+text+package&oq=sublim+text+package&aqs=chrome..69i57.9548j0j4&sourceid=chrome&ie=UTF-8#safe=off&q=sublim+text+package+python+documentation
+
+NicolasBi/Super-Converter: Convert your binary/decimal/hexadecimal number into binary/decimal/hexadecimal with a cool GUI !
+https://github.com/NicolasBi/Super-Converter
+
+python - Github download link on pypi - Stack Overflow
+http://stackoverflow.com/questions/19679425/github-download-link-on-pypi
+
+mongokit-py3/setup.py at master · aquavitae/mongokit-py3
+https://github.com/aquavitae/mongokit-py3/blob/master/setup.py
+
+distutils - Including non-Python files with setup.py - Stack Overflow
+http://stackoverflow.com/questions/1612733/including-non-python-files-with-setup-py
+
+pypa/twine: Utilities for interacting with PyPI
+https://github.com/pypa/twine
+
+NicolasBi/super_converter: Convert your binary/decimal/hexadecimal number into binary/decimal/hexadecimal with a cool GUI !
+https://github.com/NicolasBi/super_converter
+
+twine 1.8.1 : Python Package Index
+https://pypi.python.org/pypi/twine
+
+Uploading to pypi (or custom servers) — zest.releaser 6.7.2.dev0 documentation
+http://zestreleaser.readthedocs.io/en/latest/uploading.html
+
+twine 1.8.1 : Python Package Index
+https://pypi.python.org/pypi/twine
+
+TestPyPI - Python Wiki
+https://wiki.python.org/moin/TestPyPI
+
+twine 1.8.1 : Python Package Index
+https://pypi.python.org/pypi/twine
+
+Créer un setup.py et mettre sa bibliothèque Python en ligne sur Pypi | Sam & Max
+http://sametmax.com/creer-un-setup-py-et-mettre-sa-bibliotheque-python-en-ligne-sur-pypi/
+
+Les environnements virtuels Python : venv, virtualenv et virtualenvwrapper | Sam & Max
+http://sametmax.com/les-environnement-virtuels-python-virtualenv-et-virtualenvwrapper/

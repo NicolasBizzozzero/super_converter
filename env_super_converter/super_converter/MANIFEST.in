@@ -1,0 +1,4 @@
+include README.md
+recursive-include super_converter/res icon.ico
+recursive-include super_converter/locale *.mo *.po
+recursive-include super_converter/data *.json *.txt
