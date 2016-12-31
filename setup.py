@@ -99,7 +99,10 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points={
         'gui_scripts': [
-            'sconvgui=super_converter:main',
+            'sconv_gui=sconv.sconv_gui:main',
+        ],
+        'console_scripts': [
+            'sconv=sconv.sconv:main',
         ],
     },
 )
