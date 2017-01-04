@@ -1,0 +1,4 @@
+include README.md
+recursive-include sconv/res icon.ico
+recursive-include sconv/locale *.mo *.po
+recursive-include sconv/data *.json *.txt
