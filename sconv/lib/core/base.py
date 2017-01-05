@@ -1,5 +1,7 @@
 from enum import Enum
 
+from lib.tools.switchcase import switch
+
 
 class NotANumberOrWrongBase(Exception):
     pass
@@ -33,14 +35,20 @@ class NumberWithBase():
                                        _("or"),
                                        _("wrong base"))
 
-        if self.base == Base.BINARY:
-            prefix = 'b'
-        elif self.base == Base.DECIMAL:
-            prefix = 'd'
-        elif self.base == Base.HEXADECIMAL:
-            prefix = 'h'
-        else:
-            prefix = '?'
+        prefix = None
+        for case in switch(self.base):
+            if case(Base.BINARY):
+                prefix = 'b'
+                break
+            if case(Base.DECIMAL):
+                prefix = 'd'
+                break
+            if case(Base.HEXADECIMAL):
+                prefix = 'x'
+                break
+            if case():
+                prefix = '?'
+                break
         return "0{}{}".format(prefix, self.number)
 
     def is_a_number(self) -> bool:
@@ -83,24 +91,37 @@ class NumberWithBase():
         self.IS_INVALID = not self.is_a_number()
 
 
+def int_to_base(integer: int) -> Base:
+    for case in switch(integer):
+        if case(2):
+            return Base.BINARY
+            break
+        if case(10):
+            return Base.DECIMAL
+            break
+        if case(16):
+            return Base.HEXADECIMAL
+            break
+
+
 def binary_to_decimal(number: str) -> str:
     return str(int(number, base=2))
 
 
 def binary_to_hexadecimal(number: str) -> str:
-    return str(hex(int(number, base=2))).upper()
+    return str(hex(int(number, base=2))).upper()[2:]
 
 
 def decimal_to_binary(number: str) -> str:
-    return str(bin(int(number)))
+    return str(bin(int(number)))[2:]
 
 
 def decimal_to_hexadecimal(number: str) -> str:
-    return str(hex(int(number))).upper()
+    return str(hex(int(number))).upper()[2:]
 
 
 def hexadecimal_to_binary(number: str) -> str:
-    return str(bin(int(number, 16)))
+    return str(bin(int(number, 16)))[2:]
 
 
 def hexadecimal_to_decimal(number: str) -> str:

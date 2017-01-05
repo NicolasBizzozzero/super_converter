@@ -1,7 +1,7 @@
 import tkinter as tk
 
 from lib.gui.convertwidget.convertwidget import ConvertWidget
-from lib.core.base import NumberWithBase, Base
+from lib.core.base import NumberWithBase, Base, int_to_base
 
 
 class BaseWidget(ConvertWidget):
@@ -9,13 +9,15 @@ class BaseWidget(ConvertWidget):
 
     Attributes:
         parent          The Frame parent of the widget.
-        number_wbase    The number used for the convertion.
+        base_src
+        base_dest
+        str_to_convert
+        str_converted
     """
 
     def __init__(self, parent):
         super(BaseWidget, self).__init__(parent)
         self.parent = parent
-        self.number_wbase = NumberWithBase(0, Base.DECIMAL)
 
         self._init_binds()
         self._init_frames()
@@ -34,36 +36,44 @@ class BaseWidget(ConvertWidget):
 
         # Creation of the entry
         f_entry = tk.Frame(lf_left, bd=6)
-        self.string_to_convert = tk.StringVar()
+        self.str_to_convert = tk.StringVar()
         entry_to_convert = tk.Entry(f_entry,
-                                    textvariable=self.string_to_convert,
+                                    textvariable=self.str_to_convert,
                                     exportselection=0)
         entry_to_convert.focus_set()
 
         # Creation of the choice of the bases
         f_bases = tk.Frame(lf_left, bd=0)
         # Source base
-        f_left_base = tk.LabelFrame(
-            f_bases, bd=2, text="  {}  ".format(_("From")), labelanchor="n")
-        self.src_base = tk.IntVar()
-        rb1_src_base = tk.Radiobutton(
-            f_left_base, text=_("Binary"), variable=self.src_base, value=2)
-        rb2_src_base = tk.Radiobutton(
-            f_left_base, text=_("Decimal"), variable=self.src_base, value=10)
-        rb3_src_base = tk.Radiobutton(f_left_base, text=_("Hexadecimal"),
-                                      variable=self.src_base, value=16)
-        self.src_base.set(10)    # Default value
+        f_left_base = tk.LabelFrame(f_bases, bd=2,
+                                    text="  {}  ".format(_("From")),
+                                    labelanchor="n")
+        self.base_src = tk.IntVar()
+        rb1_src_base = tk.Radiobutton(f_left_base,
+                                      text=_("Binary"),
+                                      variable=self.base_src, value=2)
+        rb2_src_base = tk.Radiobutton(f_left_base,
+                                      text=_("Decimal"),
+                                      variable=self.base_src, value=10)
+        rb3_src_base = tk.Radiobutton(f_left_base,
+                                      text=_("Hexadecimal"),
+                                      variable=self.base_src, value=16)
+        self.base_src.set(10)    # Default value
         # Destination base
-        f_right_base = tk.LabelFrame(
-            f_bases, bd=2, text="  {}  ".format(_("To")), labelanchor="n")
-        self.dest_base = tk.IntVar()
-        rb1_dest_base = tk.Radiobutton(
-            f_right_base, text=_("Binary"), variable=self.dest_base, value=2)
-        rb2_dest_base = tk.Radiobutton(
-            f_right_base, text=_("Decimal"), variable=self.dest_base, value=10)
-        rb3_dest_base = tk.Radiobutton(f_right_base, text=_("Hexadecimal"),
-                                       variable=self.dest_base, value=16)
-        self.dest_base.set(2)    # Default value
+        f_right_base = tk.LabelFrame(f_bases, bd=2,
+                                     text="  {}  ".format(_("To")),
+                                     labelanchor="n")
+        self.base_dest = tk.IntVar()
+        rb1_dest_base = tk.Radiobutton(f_right_base,
+                                       text=_("Binary"),
+                                       variable=self.base_dest, value=2)
+        rb2_dest_base = tk.Radiobutton(f_right_base,
+                                       text=_("Decimal"),
+                                       variable=self.base_dest, value=10)
+        rb3_dest_base = tk.Radiobutton(f_right_base,
+                                       text=_("Hexadecimal"),
+                                       variable=self.base_dest, value=16)
+        self.base_dest.set(2)    # Default value
 
         # Creation of the convert button
         f_convert_button = tk.Frame(lf_left, bd=6)
@@ -72,12 +82,13 @@ class BaseWidget(ConvertWidget):
 
         # Creation of the label to display the conversion result
         f_label_result = tk.Frame(lf_right, bd=4)
-        self.string_converted = tk.StringVar()
+        self.str_converted = tk.StringVar()
         label_result = tk.Label(f_label_result,
-                                textvariable=self.string_converted,
+                                textvariable=self.str_converted,
                                 width=16, anchor=tk.CENTER,
                                 wraplength=150)
 
+        # Pack all this stuff !
         f_main.pack(fill="both", expand="yes", side=tk.TOP)
         f_lf_left.pack(fill="both", expand="yes", side=tk.LEFT)
         lf_left.pack(fill="both", expand="yes")
@@ -106,9 +117,10 @@ class BaseWidget(ConvertWidget):
         self.cmd_convert()
 
     def cmd_convert(self):
-        new_value = tk.convert(self.string_to_convert.get(),
-                               self.src_base.get(), self.dest_base.get())
-        self.string_converted.set(new_value)
+        number_w_base = NumberWithBase(self.str_to_convert.get(),
+                                       int_to_base(self.base_src.get()))
+        number_w_base.convert(int_to_base(self.base_dest.get()))
+        self.str_converted.set(str(number_w_base))
 
 
 if __name__ == '__main__':

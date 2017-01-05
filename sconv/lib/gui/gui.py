@@ -4,9 +4,11 @@ from sys import argv
 import json
 
 from lib.gui.translation import Language
-from lib.gui.convertwidget.convertwidget import ConvertMode
+from lib.gui.convertwidget.convertwidget import ConvertMode, int_to_mode
 from lib.gui.convertwidget.base import *
+from lib.gui.convertwidget.temperature import *
 from lib.gui.convertwidget.weight_mass import *
+from lib.tools.switchcase import switch
 
 
 class MainApplication(tk.Frame):
@@ -51,10 +53,13 @@ class MainApplication(tk.Frame):
                                self.language)
 
     def init_convertwidget(self):
-        if self.convert_mode == ConvertMode.BASE:
-            self.convertwidget = BaseWidget(self)
-        elif self.convert_mode == ConvertMode.WEIGHT_MASS:
-            self.convertwidget = WeightMass(self)
+        for case in switch(self.convert_mode):
+            if case(ConvertMode.BASE):
+                self.convertwidget = BaseWidget(self)
+            if case(ConvertMode.WEIGHT_MASS):
+                self.convertwidget = WeightMass(self)
+            if case(ConvertMode.TEMPERATURE):
+                self.convertwidget = Temperature(self)
 
     def pack_all(self):
         self.convertwidget.pack(fill=tk.BOTH, expand=True)
@@ -90,6 +95,21 @@ class MenuBar(tk.Menu):
     def init_mode_menu(self, mode: ConvertMode):
         self.var_mode = tk.IntVar()
         self.var_mode.set(mode.value)
+
+        self.mode_menu = tk.Menu(self, tearoff=0)
+        self.mode_menu.add_radiobutton(label="Base",
+                                       value=ConvertMode.BASE.value,
+                                       command=self.cmd_switch_mode,
+                                       variable=self.var_mode)
+        self.mode_menu.add_radiobutton(label="Temperature",
+                                       value=ConvertMode.TEMPERATURE.value,
+                                       command=self.cmd_switch_mode,
+                                       variable=self.var_mode)
+        self.mode_menu.add_radiobutton(label="Weight/Mass",
+                                       value=ConvertMode.WEIGHT_MASS.value,
+                                       command=self.cmd_switch_mode,
+                                       variable=self.var_mode)
+        self.add_cascade(label="Mode", menu=self.mode_menu)
 
     def init_language_menu(self, language: Language):
         self.var_language = tk.StringVar()
@@ -128,9 +148,22 @@ class MenuBar(tk.Menu):
         # Reload the window
         self.app.var_reload.set(True)
 
-    def cmd_about(self):
-            from pkg_resources import get_distribution
+    def cmd_switch_mode(self):
+        # Switch mode
+        filepath = r"data/preferences.json"
+        with open(filepath) as file:
+            filecontent = json.load(file)
+            filecontent['convertwidget'] = self.var_mode.get()
+        with open(filepath, 'w') as file:
+            file.write(json.dumps(filecontent))
 
-            messagebox.showinfo(_("About"), "{} {}".format(
-                _("Super Converter version"),
-                get_distribution('sconv').version))
+        # Change widget
+        self.app.convert_mode = int_to_mode(self.var_mode.get())
+        self.app.init_convertwidget()
+
+    def cmd_about(self):
+        from pkg_resources import get_distribution
+
+        messagebox.showinfo(_("About"), "{} {}".format(
+            _("Super Converter version"),
+            get_distribution('sconv').version))
