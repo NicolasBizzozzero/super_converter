@@ -32,7 +32,7 @@ Examples:
 
 from enum import Enum
 
-from lib.tools.switchcase import switch
+from super_converter.sconv.lib.tools.switchcase import switch
 
 
 class UnknownScale(Exception):

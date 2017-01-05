@@ -1,7 +1,7 @@
 import tkinter as tk
 
-from lib.gui.convertwidget.convertwidget import ConvertWidget
-from lib.core.base import NumberWithBase, Base, int_to_base
+from super_converter.sconv.lib.gui.convertwidget.convertwidget import ConvertWidget
+from super_converter.sconv.lib.core.base import NumberWithBase, Base, int_to_base
 
 
 class BaseWidget(ConvertWidget):
