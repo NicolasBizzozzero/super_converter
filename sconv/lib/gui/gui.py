@@ -3,12 +3,12 @@ from tkinter import messagebox
 from sys import argv
 import json
 
-from lib.gui.translation import Language
-from lib.gui.convertwidget.convertwidget import ConvertMode, int_to_mode
-from lib.gui.convertwidget.base import *
-from lib.gui.convertwidget.temperature import *
-from lib.gui.convertwidget.weight_mass import *
-from lib.tools.switchcase import switch
+from super_converter.sconv.lib.gui.translation import Language
+from super_converter.sconv.lib.gui.convertwidget.convertwidget import ConvertMode, int_to_mode
+from super_converter.sconv.lib.gui.convertwidget.base import *
+from super_converter.sconv.lib.gui.convertwidget.temperature import *
+from super_converter.sconv.lib.gui.convertwidget.weight_mass import *
+from super_converter.sconv.lib.tools.switchcase import switch
 
 
 class MainApplication(tk.Frame):
@@ -160,6 +160,7 @@ class MenuBar(tk.Menu):
         # Change widget
         self.app.convert_mode = int_to_mode(self.var_mode.get())
         self.app.init_convertwidget()
+        self.app.pack_all()
 
     def cmd_about(self):
         from pkg_resources import get_distribution

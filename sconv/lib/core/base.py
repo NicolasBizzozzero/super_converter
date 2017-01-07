@@ -1,3 +1,28 @@
+""" A module used to convert a temperature into different bases.
+
+Currently, the supported bases are :
+- Binary
+- Decimal
+- Hexadecimal
+
+Examples:
+# Convert 27 from decimal to binary
+>>> number1 = NumberWithBase("27", Base.DECIMAL)
+>>> print(number1)
+0d27
+>>> number1.convert(Base.BINARY)
+>>> print(number1)
+0b11011
+
+# Convert AaF0015424CB from hexadecimal to decimal
+>>> number2 = NumberWithBase("AaF0015424CB", Base.HEXADECIMAL)
+>>> print(number2)
+0xAAF0015424CB
+>>> number2.convert(Base.DECIMAL)
+>>> print(number2)
+0d187947791164619
+"""
+
 from enum import Enum
 
 from super_converter.sconv.lib.tools.switchcase import switch
@@ -25,7 +50,7 @@ class NumberWithBase():
     """
 
     def __init__(self, number: str, base: Base):
-        self.number = number
+        self.number = number.upper()
         self.base = base
         self.IS_INVALID = not self.is_a_number()
 
