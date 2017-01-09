@@ -2,9 +2,11 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 from super_converter.sconv.lib.gui.convertwidget.convertwidget import ConvertWidget
+from super_converter.sconv.lib.core.temperature import Temperature, str_to_scale
+from super_converter.sconv.lib.tools.switchcase import switch
 
 
-class Temperature(ConvertWidget):
+class TemperatureWidget(ConvertWidget):
     """Widget used to convert weight and mass units
 
     Attributes:
@@ -16,7 +18,7 @@ class Temperature(ConvertWidget):
     """
 
     def __init__(self, root):
-        super(Temperature, self).__init__(root)
+        super(TemperatureWidget, self).__init__(root)
         self.root = root
         self._init_frames()
         self._init_binds()
@@ -45,29 +47,30 @@ class Temperature(ConvertWidget):
         f_scales = tk.Frame(lf_left, bd=0)
         # Source scale
         f_left_scale = tk.LabelFrame(f_scales, bd=2,
-                                    text="  {}  ".format(_("From")),
-                                    labelanchor="n")
+                                     text="  {}  ".format(_("From")),
+                                     labelanchor="n")
         self.scale_src = tk.StringVar()
-        ############## COMBOBOX
-        cbb_scale_src = ttk.Combobox(f_left_scale, textvariable=self.scale_src, width=11)
-        cbb_scale_src['values'] = ("Celsius", "Delisle", "Fahrenheit", "Kelvin",
-                                   "Newton", "Rankine", "Réaumur", "Rømer")
-        cbb_scale_src.bind("<<ComboboxSelected>>", self._switch_scale_src)
+        cbb_scale_src = ttk.Combobox(f_left_scale,
+                                     textvariable=self.scale_src,
+                                     width=11)
+        cbb_scale_src['values'] = ("Celsius", "Delisle", "Fahrenheit",
+                                   "Kelvin", "Newton", "Rankine",
+                                   "Réaumur", "Rømer")
+        cbb_scale_src.bind("<<ComboboxSelected>>")
         cbb_scale_src.current(0)
-        #self.scale_src.set(0)    # Default value
-        ############## END COMBOBOX
         # Destination scale
         f_right_scale = tk.LabelFrame(f_scales, bd=2,
-                                     text="  {}  ".format(_("To")),
-                                     labelanchor="n")
+                                      text="  {}  ".format(_("To")),
+                                      labelanchor="n")
         self.scale_dest = tk.StringVar()
-        ############## COMBOBOX
-        cbb_scale_dest = ttk.Combobox(f_right_scale, textvariable=self.scale_dest, width=11)
-        cbb_scale_dest['values'] = ("Celsius", "Delisle", "Fahrenheit", "Kelvin",
-                                    "Newton", "Rankine", "Réaumur", "Rømer")
-        cbb_scale_dest.bind("<<ComboboxSelected>>", self._switch_scale_dest)
-        # previous : rb3_src_base = tk.Radiobutton(f_left_scale,text=_("Hexadecimal"),variable=self.scale_src, value=16)
-        cbb_scale_dest.current(2)
+        cbb_scale_dest = ttk.Combobox(f_right_scale,
+                                      textvariable=self.scale_dest,
+                                      width=11)
+        cbb_scale_dest['values'] = ("Celsius", "Delisle", "Fahrenheit",
+                                    "Kelvin", "Newton", "Rankine",
+                                    "Réaumur", "Rømer")
+        cbb_scale_dest.bind("<<ComboboxSelected>>")
+        cbb_scale_dest.current(3)
 
         # Creation of the convert button
         f_convert_button = tk.Frame(lf_left, bd=6)
@@ -91,9 +94,11 @@ class Temperature(ConvertWidget):
         f_entry.pack()
         entry_to_convert.pack()
         f_scales.pack(fill="x", expand="yes")
-        f_left_scale.pack(fill="y", expand="yes", side=tk.LEFT, padx=5, pady=24)
+        f_left_scale.pack(fill="y", expand="yes", side=tk.LEFT,
+                          padx=5, pady=24)
         cbb_scale_src.pack(anchor=tk.W, padx=7, pady=5)
-        f_right_scale.pack(fill="y", expand="yes", side=tk.RIGHT, padx=5, pady=24)
+        f_right_scale.pack(fill="y", expand="yes", side=tk.RIGHT,
+                           padx=5, pady=24)
         cbb_scale_dest.pack(anchor=tk.W, padx=7, pady=5)
         f_convert_button.pack(expand="yes")
         button_convert.pack(expand="yes")
@@ -101,16 +106,16 @@ class Temperature(ConvertWidget):
         label_result.pack(fill="both", expand="yes")
 
     def _init_binds(self):
-        pass
+        self.parent.root.bind('<Return>', self.cmd_bind_enter)
 
-    def _switch_scale_src(self, event):
-        pass
-
-    def _switch_scale_dest(self, event):
-        pass
+    def cmd_bind_enter(self, event):
+        self.cmd_convert()
 
     def cmd_convert(self):
-        pass
+        temperature = Temperature(self.str_to_convert.get(),
+                                  str_to_scale(self.scale_src.get()))
+        temperature.convert(str_to_scale(self.scale_dest.get()))
+        self.str_converted.set(str(temperature))
 
 
 if __name__ == '__main__':

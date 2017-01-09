@@ -6,7 +6,8 @@ The GUI can be launched by using the function "main()".
 import tkinter as tk
 import json
 
-from super_converter.sconv.lib.gui.translation import Language, switch_language, str_to_language
+from super_converter.sconv.lib.gui.translation import Language,\
+    switch_language, str_to_language
 from super_converter.sconv.lib.gui.gui import MainApplication
 
 from super_converter.sconv.lib.gui.convertwidget.convertwidget import ConvertMode, int_to_mode

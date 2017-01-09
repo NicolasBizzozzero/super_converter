@@ -3,7 +3,7 @@ import tkinter as tk
 from .convertwidget import ConvertWidget
 
 
-class WeightMassWidget(ConvertWidget):
+class SpeedWidget(ConvertWidget):
     """Widget used to convert weight and mass units
 
     Attributes:
@@ -11,7 +11,7 @@ class WeightMassWidget(ConvertWidget):
     """
 
     def __init__(self, root):
-        super(WeightMassWidget, self).__init__(root)
+        super(SpeedWidget, self).__init__(root)
         self.root = root
         self._init_frames()
         self._init_binds()

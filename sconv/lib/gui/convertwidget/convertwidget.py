@@ -11,13 +11,12 @@ class ConvertMode(Enum):
     BASE = 1
     WEIGHT_MASS = 2
     TEMPERATURE = 3
-    ENERGY = 4
+    DISTANCE = 4
     PRESSURE = 5
     CURRENCY = 6
     TIME = 7
     SPEED = 8
     ANGLE = 9
-    DISTANCE = 10
 
 
 def int_to_mode(integer: int) -> ConvertMode:
@@ -28,7 +27,7 @@ def int_to_mode(integer: int) -> ConvertMode:
     elif integer == 3:
         return ConvertMode.TEMPERATURE
     elif integer == 4:
-        return ConvertMode.ENERY
+        return ConvertMode.DISTANCE
     elif integer == 5:
         return ConvertMode.PRESSURE
     elif integer == 6:
@@ -39,8 +38,6 @@ def int_to_mode(integer: int) -> ConvertMode:
         return ConvertMode.SPEED
     elif integer == 9:
         return ConvertMode.ANGLE
-    elif integer == 10:
-        return ConvertMode.DISTANCE
     else:
         raise ModeDoesNotExists(("{} is currently not implemented."
                                  ).format(integer))

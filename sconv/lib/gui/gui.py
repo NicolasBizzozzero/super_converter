@@ -42,7 +42,7 @@ class MainApplication(tk.Frame):
     def init_root(self, root):
         tk.Frame.__init__(self, root)
         self.root = root
-        path = "{}{}".format(argv[0][:-13], r"/res/icon.ico")
+        path = "{}{}".format(argv[0][:-13], r"./res/icon.ico")
         self.root.iconbitmap(path)
         self.root.geometry('{}x{}'.format(430, 220))
         self.root.resizable(width=False, height=False)
@@ -56,10 +56,34 @@ class MainApplication(tk.Frame):
         for case in switch(self.convert_mode):
             if case(ConvertMode.BASE):
                 self.convertwidget = BaseWidget(self)
+                break
             if case(ConvertMode.WEIGHT_MASS):
-                self.convertwidget = WeightMass(self)
+                self.convertwidget = WeightMassWidget(self)
+                break
             if case(ConvertMode.TEMPERATURE):
-                self.convertwidget = Temperature(self)
+                self.convertwidget = TemperatureWidget(self)
+                break
+            if case(ConvertMode.DISTANCE):
+                self.convertwidget = DistanceWIdget(self)
+                break
+            if case(ConvertMode.PRESSURE):
+                self.convertwidget = PressureWidget(self)
+                break
+            if case(ConvertMode.CURRENCY):
+                self.convertwidget = CurrencyWidget(self)
+                break
+            if case(ConvertMode.TIME):
+                self.convertwidget = TimeWidget(self)
+                break
+            if case(ConvertMode.SPEED):
+                self.convertwidget = SpeedWidget(self)
+                break
+            if case(ConvertMode.ANGLE):
+                self.convertwidget = AngleWidget(self)
+                break
+            if case(ConvertMode.NONE):
+                self.convertwidget = NoneWidget(self)
+                break
 
     def pack_all(self):
         self.convertwidget.pack(fill=tk.BOTH, expand=True)
@@ -109,6 +133,36 @@ class MenuBar(tk.Menu):
                                        value=ConvertMode.WEIGHT_MASS.value,
                                        command=self.cmd_switch_mode,
                                        variable=self.var_mode)
+        self.mode_menu.add_radiobutton(label="Pressure",
+                                       value=ConvertMode.PRESSURE.value,
+                                       command=self.cmd_switch_mode,
+                                       variable=self.var_mode,
+                                       state=tk.DISABLED)
+        self.mode_menu.add_radiobutton(label="Currency",
+                                       value=ConvertMode.CURRENCY.value,
+                                       command=self.cmd_switch_mode,
+                                       variable=self.var_mode,
+                                       state=tk.DISABLED)
+        self.mode_menu.add_radiobutton(label="Time",
+                                       value=ConvertMode.TIME.value,
+                                       command=self.cmd_switch_mode,
+                                       variable=self.var_mode,
+                                       state=tk.DISABLED)
+        self.mode_menu.add_radiobutton(label="Speed",
+                                       value=ConvertMode.SPEED.value,
+                                       command=self.cmd_switch_mode,
+                                       variable=self.var_mode,
+                                       state=tk.DISABLED)
+        self.mode_menu.add_radiobutton(label="Angle",
+                                       value=ConvertMode.ANGLE.value,
+                                       command=self.cmd_switch_mode,
+                                       variable=self.var_mode,
+                                       state=tk.DISABLED)
+        self.mode_menu.add_radiobutton(label="Distance",
+                                       value=ConvertMode.DISTANCE.value,
+                                       command=self.cmd_switch_mode,
+                                       variable=self.var_mode,
+                                       state=tk.DISABLED)
         self.add_cascade(label="Mode", menu=self.mode_menu)
 
     def init_language_menu(self, language: Language):

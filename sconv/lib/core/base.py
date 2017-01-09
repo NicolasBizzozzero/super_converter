@@ -87,6 +87,19 @@ class NumberWithBase():
             return False
 
     def convert(self, new_base: Base) -> None:
+        # Set the flag value if the number match his current base
+        if not self.is_a_number():
+            self.IS_INVALID = True
+            return
+        else:
+            self.IS_INVALID = False
+
+        # Set the flag if the number is negative
+        # TODO: Support two-complement
+        if int(self.number, base=self.base.value) < 0:
+            self.IS_INVALID = True
+            return
+
         # Convert the number into a new base
         if self.base == Base.BINARY:
             if new_base == Base.DECIMAL:
@@ -111,9 +124,6 @@ class NumberWithBase():
             elif new_base == Base.DECIMAL:
                 self.base = Base.DECIMAL
                 self.number = hexadecimal_to_decimal(self.number)
-
-        # Set the flag value if the number match his current base
-        self.IS_INVALID = not self.is_a_number()
 
 
 def int_to_base(integer: int) -> Base:

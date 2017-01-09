@@ -50,19 +50,44 @@ class Scale(Enum):
     ROMER = 7
 
 
+def str_to_scale(name: str) -> Scale:
+    for case in switch(name):
+        if case("Celsius"):
+            return Scale.CELSIUS
+        if case("Delisle"):
+            return Scale.DELISLE
+        if case("Fahrenheit"):
+            return Scale.FAHRENHEIT
+        if case("Kelvin"):
+            return Scale.KELVIN
+        if case("Newton"):
+            return Scale.NEWTON
+        if case("Rankine"):
+            return Scale.RANKINE
+        if case("Réaumur"):
+            return Scale.REAUMUR
+        if case("Rømer"):
+            return Scale.ROMER
+
+
 class Temperature():
     """ A couple of a scale and a value.
 
         Attributes:
             scale    The scale currently used to represent the temperature.
             value    The value associated to the temperature.
+            IS_INVALID
     """
 
-    def __init__(self, value: float, scale: Scale):
+    def __init__(self, value: str, scale: Scale):
         self.value = value
         self.scale = scale
+        self.IS_INVALID = not self.is_a_number()
 
     def __str__(self):
+        if self.IS_INVALID:
+            return "{}\n{}".format(_("Incorrect"), _("value"))
+
         unit = None
         for case in switch(self.scale):
             if case(Scale.CELSIUS):
@@ -91,10 +116,26 @@ class Temperature():
                 break
         return "{}{}".format(self.value, unit)
 
+    def is_a_number(self) -> bool:
+        """ Dirty method to check if a number is correctly written in his corresponding
+            scale.
+        """
+        try:
+            float(self.value)
+            return True
+        except Exception:
+            return False
+
     def convert(self, newScale: Scale, rounding: int = 3):
         if self.scale == newScale:
             return
+        if not self.is_a_number():
+            self.IS_INVALID = True
+            return
+        else:
+            self.IS_INVALID = False
 
+        self.value = float(self.value)
         for case in switch(self.scale):
             if case(Scale.CELSIUS):
                 for case in switch(newScale):
