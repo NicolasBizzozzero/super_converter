@@ -1,4 +1,4 @@
 include README.md
-recursive-include super_converter/res icon.ico
-recursive-include super_converter/locale *.mo *.po
-recursive-include super_converter/data *.json *.txt
+recursive-include sconv/res icon.ico
+recursive-include sconv/locale *.mo *.po
+recursive-include sconv/data *.json *.txt

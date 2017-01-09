@@ -14,13 +14,13 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
-import super_converter
+import sconv
 
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-    long_description = f.read()
+with open(path.join(here, 'README.md'), encoding='utf-8') as file:
+    long_description = file.read()
 
 setup(
     name='sconv',
@@ -28,7 +28,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version=super_converter.__version__,
+    version=sconv.__version__,
 
     description='Graphical tool to convert a number from one base to another',
     long_description=long_description,
@@ -99,10 +99,10 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points={
         'gui_scripts': [
-            'sconv_gui=sconv.sconv_gui:main',
+            'sconv_gui = super_converter.sconv.sconv_gui:main',
         ],
         'console_scripts': [
-            'sconv=sconv.sconv:main',
+            'sconv = super_converter.sconv.sconv:main',
         ],
     },
 )
