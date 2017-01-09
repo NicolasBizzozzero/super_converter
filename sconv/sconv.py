@@ -1,5 +1,11 @@
+"""Command-line for the super_converter package.
+
+The command-line can be launched by using the function "main()".
+"""
+
+
 def main():
-    pass
+    print("Bonjour Command-line")
 
 
 if __name__ == '__main__':
