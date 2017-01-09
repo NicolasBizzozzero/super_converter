@@ -157,10 +157,12 @@ class MenuBar(tk.Menu):
         with open(filepath, 'w') as file:
             file.write(json.dumps(filecontent))
 
-        # Change widget
-        self.app.convert_mode = int_to_mode(self.var_mode.get())
-        self.app.init_convertwidget()
-        self.app.pack_all()
+        # Destroy the window
+        self.root.destroy()
+        self.root.quit()
+
+        # Reload the window
+        self.app.var_reload.set(True)
 
     def cmd_about(self):
         from pkg_resources import get_distribution
