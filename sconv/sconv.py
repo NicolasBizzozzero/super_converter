@@ -3,7 +3,6 @@
 The command-line can be launched by using the function "main()".
 """
 
-
 def main():
     print("Bonjour Command-line")
 
