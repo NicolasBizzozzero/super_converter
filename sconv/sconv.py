@@ -1,3 +1,8 @@
+"""Command-line for the super_converter package.
+
+The command-line can be launched by using the function "main()".
+"""
+
 def main():
     print("Bonjour Command-line")
 

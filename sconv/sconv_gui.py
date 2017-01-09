@@ -1,5 +1,6 @@
-"""
+"""GUI for the super_converter package.
 
+The GUI can be launched by using the function "main()".
 """
 
 import tkinter as tk
@@ -32,6 +33,8 @@ class Main():
         language = self._load_language(r"data/preferences.json")
         conv_widget = self._load_convwidget(r"data/preferences.json")
         self._start_application(conv_widget, language)
+
+        # Chek if a reloading of the app has been requested
         if self.app.var_reload.get():
             self._run()
 
