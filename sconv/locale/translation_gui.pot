@@ -2,10 +2,11 @@
 # Copyright (C) YEAR ORGANIZATION
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-12-26 17:57+0100\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-01-09 23:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=cp1252\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../lib\convertion_functions.py:13
 msgid "Not a number"
@@ -75,3 +76,10 @@ msgstr ""
 msgid "Convert"
 msgstr ""
 
+#: ../lib\core\temperature.py:89
+msgid "Incorrect"
+msgstr ""
+
+#: ../lib\core\temperature.py:89
+msgid "value"
+msgstr ""
